@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inkwell | Blogging Platform</title>
+  <meta name="description" content="A blogging platform where you can create, edit, publish and delete posts. Built with HTML, CSS and JavaScript.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#app">Skip to content</a>
+
+  <header class="top">
+    <div class="wrap top-row">
+      <a href="#/" class="brand">Ink<span>well</span></a>
+      <a href="#/new" class="btn primary small">+ New post</a>
+    </div>
+  </header>
+
+  <main class="wrap" id="app" tabindex="-1"></main>
+
+  <footer class="footer">
+    <div class="wrap foot-row">
+      <p>Posts are saved in this browser (localStorage). Use backup to move them elsewhere.</p>
+      <div class="foot-actions">
+        <button class="link-btn" id="exportBtn" type="button">Export backup</button>
+        <button class="link-btn" id="importBtn" type="button">Import backup</button>
+        <input type="file" id="importFile" accept="application/json" hidden>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="dlg" aria-labelledby="dlgTitle">
+    <form method="dialog">
+      <h2 id="dlgTitle">Delete this post?</h2>
+      <p id="dlgText">This can't be undone.</p>
+      <div class="dlg-actions">
+        <button value="cancel" class="btn ghost small">Cancel</button>
+        <button value="ok" class="btn danger small" id="dlgOk">Delete</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
