@@ -348,8 +348,8 @@ $('#importFile').addEventListener('change', async e => {
   try {
     const data = JSON.parse(await file.text());
     if (!Array.isArray(data)) throw new Error('bad');
-    const valid = data.filter(p => p && typeof p.id === 'string' && typeof p.title === 'string' && typeof p.content === 'string')
-      .map(p => ({ id: p.id, title: p.title.slice(0, 120), content: p.content, tags: Array.isArray(p.tags) ? p.tags.map(String).slice(0, 6) : [],
+    const valid = data.filter(p => p && typeof p.id === 'string' && p.id.trim() && typeof p.title === 'string' && p.title.trim() && typeof p.content === 'string' && p.content.trim())
+      .map(p => ({ id: p.id, title: p.title.slice(0, 120), content: p.content, tags: Array.isArray(p.tags) ? [...new Set(p.tags.map(t => String(t).trim().toLowerCase()).filter(Boolean))].slice(0, 6) : [],
         status: p.status === 'published' ? 'published' : 'draft', createdAt: +p.createdAt || Date.now(), updatedAt: +p.updatedAt || Date.now(), publishedAt: +p.publishedAt || null }));
     if (!valid.length) throw new Error('empty');
     valid.forEach(v => { const i = posts.findIndex(p => p.id === v.id); i >= 0 ? posts[i] = v : posts.push(v); });
